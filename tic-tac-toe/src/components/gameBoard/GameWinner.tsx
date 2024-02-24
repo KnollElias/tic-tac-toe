@@ -1,5 +1,5 @@
 import React from "react";
-import { getGameState } from "../../service/gameState";
+import { getGameState, clearGameState } from "../../service/gameState";
 
 const GameWinner: React.FC = () => {
   const gameState = getGameState();
@@ -7,6 +7,7 @@ const GameWinner: React.FC = () => {
   return (
     <header style={{ textAlign: "center", marginBottom: "20px" }}>
       <div>Winner: {gameState.winner ? gameState.winner : "No winner yet"}</div>
+      <div onClick={() => clearGameState()}>Reset Game</div>
     </header>
   );
 };
