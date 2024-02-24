@@ -13,18 +13,34 @@ const GameState: React.FC = () => {
     const refreshGameState = () => {
       setLocalGameState(getGameState());
     };
+
+    const handleGameReset = () => {
+      refreshGameState();
+    };
+
+    window.addEventListener("gameReset", handleGameReset);
     refreshGameState();
+
+    return () => window.removeEventListener("gameReset", handleGameReset);
   }, []);
 
   const updateGameState = (cellIndex: number, rowIndex: number) => {
     const originalGameState = getGameState();
     let newGameState = { ...originalGameState };
-    newGameState.board[rowIndex][cellIndex] = newGameState.currentPlayer;
-    newGameState.currentPlayer = changePlayer(newGameState.currentPlayer);
-    newGameState.winner = checkWinner(newGameState.board);
-    console.log(newGameState);
-    setGameState(newGameState);
-    setLocalGameState(newGameState);
+    const previousValue = newGameState.board[rowIndex][cellIndex];
+    const gameWinner = newGameState.winner;
+
+    if (previousValue != null || gameWinner != null) {
+      alert("Invalid move");
+    } else {
+      newGameState.board[rowIndex][cellIndex] = newGameState.currentPlayer;
+      newGameState.currentPlayer = changePlayer(newGameState.currentPlayer);
+      newGameState.winner = checkWinner(newGameState.board);
+      console.log(newGameState);
+      setGameState(newGameState);
+      setLocalGameState(newGameState);
+      window.dispatchEvent(new CustomEvent("gameMove"));
+    }
   };
 
   return (

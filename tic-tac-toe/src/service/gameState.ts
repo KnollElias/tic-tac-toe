@@ -71,12 +71,9 @@ export const setGameState = (state: GameState): void => {
   localStorage.setItem("gameState", JSON.stringify(state));
 };
 
-export const getCurrentPlayer = (): "X" | "O" => {
-  const state = getGameState();
-  return state.currentPlayer;
-};
-
 export const clearGameState = (): void => {
   localStorage.removeItem("gameState");
   setGameState(defaultState);
+  window.dispatchEvent(new CustomEvent("gameReset"));
+  window.dispatchEvent(new CustomEvent("gameMove"));
 };
