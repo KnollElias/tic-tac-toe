@@ -32,3 +32,8 @@ export const getCurrentPlayer = (): "X" | "O" => {
   const state = getGameState();
   return state.currentPlayer;
 };
+
+export const clearGameState = (): void => {
+  localStorage.removeItem("gameState");
+  setGameState(defaultState);
+};

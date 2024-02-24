@@ -9,20 +9,20 @@ To launch the application, follow these steps:
 1. Clone the repository to your local machine.
 2. Navigate to the project directory:
 
-BACKTICKbash
+`bash
 cd tic-tac-toe
-BACKTICK
+`
 
 3. Install dependencies and start the application:
 
-BACKTICKbash
+`bash
 npm install && npm start
-BACKTICK
+`
 
 The game will be accessible in your web browser.
 
 ## Game State Management
 
-The game state is maintained in `gameState.json`. If you wish to restart the game or reset its state, simply delete this file.
+The game state is managed using local storage to ensure your progress is saved. To restart the game or reset its state, you can clear your browser's local storage.
 
 Enjoy the game!
